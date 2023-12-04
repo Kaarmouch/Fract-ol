@@ -6,11 +6,11 @@
 /*   By: aglampor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:13:48 by aglampor          #+#    #+#             */
-/*   Updated: 2023/11/28 19:00:01 by aglampor         ###   ########.fr       */
+/*   Updated: 2023/12/03 04:19:24 by aglampor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minilibx/mlx.h"
+#include "fractol.h"
 
 static void     get_set(t_fractol *f, char **av)
 {
@@ -32,13 +32,14 @@ static void     get_set(t_fractol *f, char **av)
                 help_msg(f);
 }
 
-int	main(void)
+int	main(int argc, char **agrv)
 {
 	t_fractol	f;
 
-	if (ac != 2)
-		help_msg(&f)
-	clean_init(&f)
+	if (argc != 2)
+		help_msg(&f);
+	clean_init(&f);
+	get_set(&f, argv);
 	mlx_loop(init_ptr);
 	return (0);	
 }

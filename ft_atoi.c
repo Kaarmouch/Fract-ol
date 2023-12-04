@@ -1,43 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   help.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aglampor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 02:33:51 by aglampor          #+#    #+#             */
-/*   Updated: 2023/12/04 04:28:54 by aglampor         ###   ########.fr       */
+/*   Created: 2023/10/04 14:06:10 by aglampor          #+#    #+#             */
+/*   Updated: 2023/10/12 11:59:51 by aglampor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "fractol.h"
+#include "libft.h"
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_atoi(const char *nptr)
 {
+	int	nbr;
+	int	signe;
 	int	i;
 
 	i = 0;
-	while (s1[i] && s1[i] == s2[i])
+	nbr = 0;
+	signe = 1;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
 		i++;
-	if (s1[i] && s1[i] == s2[i])
-		return (1);
-	return (0);
-}
-
-char	*ft_tolower(char *str)
-{
-	int	i;
-	
-	i = 0;
-	while(str[i])
+	if (nptr[i] == '-')
 	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-			str[i] += 32;
+		signe = -1;
 		i++;
 	}
-	return (str);
-}
-
-void	help_msg()
-{
-	write(1,"Argument invalide !", 20);
+	else if (nptr[i] == '+')
+		i++;
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		nbr = nbr * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (nbr * signe);
 }

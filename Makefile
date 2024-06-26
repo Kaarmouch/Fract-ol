@@ -6,7 +6,7 @@
 #    By: aglampor <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 15:05:19 by aglampor          #+#    #+#              #
-#    Updated: 2023/12/04 03:41:32 by aglampor         ###   ########.fr        #
+#    Updated: 2024/06/26 14:43:57 by aglampor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ MLX_LIB		=	$(addprefix $(MLX_PATH), $(MLX_FILE))
 
 MLX_EX		=	$(MLX_LIB) $(MLX_FLAG)
 
-C_FILE		=	 fractol.c  draw.c  fract_init.c  help.c  utils.c	\
+C_FILE		=	 fractol.c draw.c fract_init.c help.c utils.c Julia.c\
+			 Mandelbrot.c
 
 SRC_DIR		=	./src/
 

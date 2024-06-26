@@ -6,7 +6,7 @@
 /*   By: aglampor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 02:33:51 by aglampor          #+#    #+#             */
-/*   Updated: 2023/12/04 04:28:54 by aglampor         ###   ########.fr       */
+/*   Updated: 2024/06/13 15:16:20 by aglampor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
@@ -16,11 +16,13 @@ int	ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
-	while (s1[i] && s1[i] == s2[i])
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (0);
 		i++;
-	if (s1[i] && s1[i] == s2[i])
-		return (1);
-	return (0);
+	}
+	return (1);
 }
 
 char	*ft_tolower(char *str)
@@ -37,7 +39,18 @@ char	*ft_tolower(char *str)
 	return (str);
 }
 
-void	help_msg()
+int	ft_strlen(char *s)
 {
-	write(1,"Argument invalide !", 20);
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	write(fd, s, (int)ft_strlen(s));
+}
+

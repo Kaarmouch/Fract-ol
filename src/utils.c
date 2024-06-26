@@ -6,21 +6,37 @@
 /*   By: aglampor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 18:30:08 by aglampor          #+#    #+#             */
-/*   Updated: 2023/12/04 04:30:54 by aglampor         ###   ########.fr       */
+/*   Updated: 2024/06/26 13:43:09 by aglampor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
-
-int	mouse_scroll_hook(int button, int x, int y, t_fractol *f)
+int	ft_atoi(char *str)
 {
-	ptintf("Molette de la souris: bouton %d, position (%d, %d)\n", button, x, y);
-	return (0);
+	int	i;
+	int	is_neg;
+	int	res;
+
+	is_neg = 1;
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+		i++;
+	if (str[i] == '-')
+		is_neg = -1;
+	if (is_neg == -1 || str[i] == '+')
+		i++;
+	res = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+		res = (res * 10) + (str[i++] - '0');
+	return (res * is_neg);
 }
 
 int	key_press(int keycode, t_fractol *f)
 {
 	if (keycode == 53)
-		clean_exit(0, f);
+		clean_exit(0, "Out", f);
 	if (keycode == 69)
 	{
 		f->max_r *= 0.9;
@@ -40,8 +56,10 @@ int	key_press(int keycode, t_fractol *f)
 	return (0);
 }
 
-void	clean_exit(int exit_code, t_fractol *f)
+void	clean_exit(int exit_code, char *msg, t_fractol *f)
 {
+	if (msg != 0)
+		ft_putstr_fd(msg, 2);
 	if (!f)
 		exit(exit_code);
 	if (f->img)
@@ -55,12 +73,4 @@ void	clean_exit(int exit_code, t_fractol *f)
 		free(f->mlx);
 	}
 	exit(exit_code);
-}
-
-int	msg(char *str1, char *str2, int errno)
-{
-	ft_putstr_fd("Fractol: ", 2);
-	ft_putstr_fd(str1, 2);
-	ft_putendl_fd(str2, 2);
-	return (0);
 }
